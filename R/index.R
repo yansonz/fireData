@@ -21,6 +21,30 @@ upload <- function(x, projectURL, directory = "main", token = "none"){
   return(paste0(directory,"/",httr::content(Response)$name))
 }
 
+#' @title The firebase data update function:
+#' @author Robin Kohze
+#' @description The function allows to update/edit data objects, such as variables,lists and data.frames
+#' @param x A data.frame or data.table {object}
+#' @param projectURL The Firebase project URL {string}
+#' @param directory The optimal Firebase subdirectory {string}
+#' @param token The user access token that can be retrieved with the auth() function. Required when if the database rules specify the need for user authentications. {string}
+#' @return returns http request answer which includes a result of the reuest.
+#' @export
+#' @examples
+#' \dontrun{
+#' upload(x = mtcars, projectURL = "https://firedata-b0e54.firebaseio.com/", directory = "main")
+#' }
+update <- function(x, projectURL, directory = "main", token = "none"){
+  output = fileConversion(x)
+
+  if (token == "none") {
+    Response = httr::PUT(paste0(projectURL,"/",directory,".json"), body = jsonlite::toJSON(output, auto_unbox = TRUE))
+  } else {
+    Response = httr::PUT(paste0(projectURL,"/",directory,".json?auth=",token), body = jsonlite::toJSON(output, auto_unbox = TRUE))
+  }
+  return(httr::http_status(Response)$category)
+}
+
 #' @title Data conversion function
 #' @description The internal data conversion function to bring data in the right json format. In case the uploaded file is a s4 class object, the object is converted to a binary s4 object.
 #' @param x the input file.
