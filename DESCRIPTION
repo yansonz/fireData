@@ -12,10 +12,9 @@ BugReports: https://github.com/Kohze/fireData/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Imports:
-  httr (>= 1.2.1),
-  jsonlite (>= 	1.4),
-  curl (>= 2.3)
-Suggests:
-  testthat (>= 1.0),
-  covr (>= 2.2.2)
+Imports: httr (>= 1.2.1), jsonlite (>= 1.4), curl (>= 2.3)
+Suggests: testthat (>= 1.0), covr (>= 2.2.2)
+NeedsCompilation: no
+Packaged: 2018-04-21 04:24:51 UTC; yanso
+Author: Robin Kohze [aut, cre]
+Maintainer: Robin Kohze <Robin@Kohze.com>
